@@ -1,1 +1,1 @@
-"""Test suite for the twint package."""
+"""Test suite for the twintng package."""

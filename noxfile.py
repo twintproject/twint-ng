@@ -5,7 +5,7 @@ from typing import Any
 import nox
 from nox.sessions import Session
 
-package = "twint"
+package = "twintng"
 nox.options.sessions = "lint", "mypy", "pytype", "tests"
 locations = "src", "tests", "noxfile.py"
 

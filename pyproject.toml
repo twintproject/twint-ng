@@ -1,12 +1,12 @@
 [tool.poetry]
-name = "twint"
+name = "twintng"
 version = "0.1.0"
 description = "An advanced Twitter scraping & OSINT tool."
 authors = ["eh-93", "o7n", "pielco11"]
 license = "MIT"
 readme = "README.md"
-repository = "https://github.com/twintproject/twint-ng"
-keywords = ["twint-ng", "twint"]
+repository = "https://github.com/twintproject/twintng-ng"
+keywords = ["twintng-ng", "twintng"]
 
 [tool.poetry.dependencies]
 python = "^3.7"
@@ -35,14 +35,14 @@ flake8-docstrings = "^1.5.0"
 codecov = "^2.1.4"
 
 [tool.poetry.scripts]
-twint = "twint.app:main"
+twintng = "twintng.app:main"
 
 [tool.coverage.paths]
 source = ["src", "*/site-packages"]
 
 [tool.coverage.run]
 branch = true
-source = ["twint"]
+source = ["twintng"]
 
 [tool.coverage.report]
 show_missing = true

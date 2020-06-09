@@ -1,5 +1,5 @@
 """Tests to get started."""
-from twint.app import main
+from twintng.app import main
 
 
 def test_app() -> None:
