@@ -10,6 +10,7 @@ import time
 import urllib
 import datetime
 import logging
+import json
 
 def convertToInt(x):
     multDict = {
@@ -33,6 +34,43 @@ def convertToInt(x):
         pass
 
     return 0
+
+def runSearch(search):
+  params = {
+    'vertical': 'default',
+    'src': 'unkn',
+    'include_available_features': '1',
+    'include_entities': '1',
+    'reset_error_state': 'false',
+    'max_position': '-1',
+    'q': search,
+  }
+  headers = {
+    'User-Agent': 'Mozilla/5.0 (Windows NT 6.4; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2225.0 Safari/537.36'
+  }
+
+  session = requests.Session()
+  done = False
+  retries = 3
+  while not done and retries > 0:
+    qs = urllib.parse.urlencode(params)
+    url = f'https://twitter.com/i/search/timeline?{qs}'
+    response = session.get(url, headers=headers)
+    jsonResponse = json.loads(response.text)
+    html = jsonResponse['items_html']
+    soup = BeautifulSoup(html, "html.parser")
+    feed = soup.find_all('div', 'tweet')
+    if len(feed) > 0:
+      retries = 3
+    else:
+      retries -= 1
+
+    # print(soup.prettify())
+    for tweet in feed:
+      print(tweet.find('a', 'tweet-timestamp')['title'] + ':' + tweet.find('p', 'tweet-text').text)
+
+    params['max_position'] = jsonResponse["min_position"]
+    
 
 
 def getProfile(username):
